@@ -24,11 +24,14 @@ class Shelter
 		end
 	end
 
-	def list_clients
-		if @clients == []
-			puts "You don't have any clients you fool!"
-		else 
-			p @clients
+	def access_client(name)
+			client_names = []
+			@clients.each {|x| client_names << x.name}
+			if client_names.include(name)
+				return true
+			else
+				return false
+			end
 		end
 	end
 
