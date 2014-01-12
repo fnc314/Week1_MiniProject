@@ -1,7 +1,6 @@
 require './minilab_animal.rb'
 require './minilab_client.rb'
 require './minilab_shelter.rb'
-require 'pry'
 
 HappyTails = Shelter.new("Happy Tails Shelter")
 HappyTails.pets << Animal.new("Foo", 2, "male", "dog", ["ball", "bone", "rope"])
@@ -71,25 +70,60 @@ while choice != 'q'
 		puts "First we'll see if they are in our database of clients already"
 		puts "What is the client's name?"
 		name = gets.chomp
-		binding.pry
-		if HappyTails.access_client(name)
-			puts "I see we have #{name} in our system."
+		if HappyTails.client_names.include?(name)
+			puts "I see here we have #{name} in our system."
 			puts "Please verify the following:\n Client Age: #{name}.age \n No of Children: #{name}.num_of_chldren \n No of Pets: #{name}.num_of_pets"
 			puts "What animal would #{name} like to adopt?"
 			animal_name = gets.chomp
 			puts "Let me check on that..."
 			HappyTails.pets.each { |x| p x.name if x.name == animal_name }
-		#else 
-			#puts "It looks like #{name} is not in the system...let's add them..."
-			#print "Client name: #{name}\n"
-			#print "Client age:"
-			#age = gets.chomp.to_i
-			#print "Number of children:"
-			#children = gets.chomp.to_i
-			#print "Number of current pets:"
-			#pets = gets.chomp.to_i
-			#HappyTails.clients << Client.new(name, age, pets, children)
+		else 
+			puts "It looks like #{name} is not in the system...let's add them..."
+			print "Client name: #{name}\n"
+			print "Client age:"
+			age = gets.chomp.to_i
+			print "Number of children:"
+			children = gets.chomp.to_i
+			print "Number of current pets:"
+			pets = gets.chomp.to_i
+			HappyTails.clients << Client.new(name, age, children, pets)
 		end
+
+	when "6"
+		puts "How adorable!?!\nA new member of the Happy Tails Family!!"
+		puts "Let's get this cutie in our database then...\nFirst a few questions:"
+		puts "Animal name: "
+		name_animal = gets.chomp
+		puts "Animal age: "
+		age_animal = gets.chomp.to_i
+		puts "Animal gender: "
+		gender = gets.chomp
+		puts "Animal species: "
+		species = gets.chomp
+		puts "Any toys (EX: ball, bone, rope): "
+		toys = gets.chomp.split(", ")
+		puts "#{name} the #{gender} #{species} is being added to the database"
+		new_animal = Animal.new(name_animal, age_animal, gender, species, toys)
+		HappyTails.pets << new_animal
+		puts "\n\n\nNow we need some information from our new client..."
+		puts "Client name: "
+		name_client = gets.chomp
+		puts "Client age: "
+		age_client = gets.chomp.to_i
+		puts "Number of children: "
+		num_of_chldren = gets.chomp.to_i
+		puts "Number of current pets (not including #{name_animal} here): "
+		num_of_pets = gets.chomp.to_i
+		new_client = Client.new(name_client, age_client, num_of_chldren, num_of_pets)
+		if @clients.include?(new_client)
+			puts "It looks like #{name_client} is in the system already.  Great!"
+		else
+			new_client << @clients
+		end
+
+		message += "Thank you!  We hope to find #{name_animal} a good home!"
+
+
 
 	else
 		message += "ERROR!  ERROR!  Incorrect input!!"

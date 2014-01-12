@@ -24,16 +24,11 @@ class Shelter
 		end
 	end
 
-	def access_client(name)
-			client_names = []
-			@clients.each {|x| client_names << x.name}
-			if client_names.include(name)
-				return true
-			else
-				return false
-			end
-		end
-	end
+def client_names
+	client_names = []
+	@clients.each { |x| client_names << x.name }
+	return client_names
+end
 
 	def list_animals
 		if @pets == []
