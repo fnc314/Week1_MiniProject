@@ -5,7 +5,7 @@ require './minilab_shelter.rb'
 HappyTails = Shelter.new("Happy Tails Shelter")
 
 def menu message
-	puts 'clear'
+	puts `clear`
 
 	puts "#{message}\n\n" unless message.empty?
 
@@ -65,6 +65,9 @@ while choice != 'q'
 			p x.name
 		end
 	
+
+	else
+		puts "ERROR!  ERROR!  Incorrect input!!"
 	end
 
 	choice = menu message
