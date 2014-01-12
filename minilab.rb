@@ -1,8 +1,11 @@
 require './minilab_animal.rb'
 require './minilab_client.rb'
 require './minilab_shelter.rb'
+require 'pry'
 
 HappyTails = Shelter.new("Happy Tails Shelter")
+HappyTails.pets << Animal.new("Foo", 2, "male", "dog", ["ball", "bone", "rope"])
+HappyTails.clients << Client.new("John", 43, 2, 0)
 
 def menu message
 	puts `clear`
@@ -38,7 +41,6 @@ while choice != 'q'
 		print "Animal toys (EX:  ball, bone, rope):"
 		toys = gets.chomp.split(", ")
 		HappyTails.pets << Animal.new(name, age, gender, species, toys)
-
 		message += "#{name} the #{gender} #{species} has been created!"
 
 	when "2"
@@ -52,17 +54,16 @@ while choice != 'q'
 		print "Number of current pets:"
 		pets = gets.chomp.to_i
 		HappyTails.clients << Client.new(name, age, pets, children)
-
 		message += "#{name} is now a new client of Happy Tails Shelter!  Welcome!"
 
 	when "3"
 		HappyTails.pets.each do |x|
-			p x.name
+			message += x.name + " "
 		end
 
 	when "4"
 		HappyTails.clients.each do |x|
-			p x.name
+			message += x.name + " "
 		end
 	
 	when "5"
@@ -70,26 +71,28 @@ while choice != 'q'
 		puts "First we'll see if they are in our database of clients already"
 		puts "What is the client's name?"
 		name = gets.chomp
-		if HappyTails.clients.include(x)
+		binding.pry
+		if HappyTails.access_client(name)
 			puts "I see we have #{name} in our system."
+			puts "Please verify the following:\n Client Age: #{name}.age \n No of Children: #{name}.num_of_chldren \n No of Pets: #{name}.num_of_pets"
 			puts "What animal would #{name} like to adopt?"
 			animal_name = gets.chomp
 			puts "Let me check on that..."
-			HappyTails.pets.each { |x| p x if x.name == animal_name }
-		else 
-			puts "It looks like #{name} is not in the system...let's add them..."
-			print "Client name: #{name}"
-			print "Client age:"
-			age = gets.chomp.to_i
-			print "Number of children:"
-			children = gets.chomp.to_i
-			print "Number of current pets:"
-			pets = gets.chomp.to_i
-			HappyTails.clients << Client.new(name, age, pets, children)
+			HappyTails.pets.each { |x| p x.name if x.name == animal_name }
+		#else 
+			#puts "It looks like #{name} is not in the system...let's add them..."
+			#print "Client name: #{name}\n"
+			#print "Client age:"
+			#age = gets.chomp.to_i
+			#print "Number of children:"
+			#children = gets.chomp.to_i
+			#print "Number of current pets:"
+			#pets = gets.chomp.to_i
+			#HappyTails.clients << Client.new(name, age, pets, children)
 		end
 
 	else
-		puts "ERROR!  ERROR!  Incorrect input!!"
+		message += "ERROR!  ERROR!  Incorrect input!!"
 	end
 
 	choice = menu message
