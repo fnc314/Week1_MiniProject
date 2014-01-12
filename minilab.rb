@@ -64,5 +64,8 @@ while choice != 'q'
 		HappyTails.clients.each do |x|
 			p x.name
 		end
+	
 	end
+
+	choice = menu message
 end
