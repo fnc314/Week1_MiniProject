@@ -2,9 +2,10 @@ require './minilab_animal.rb'
 require './minilab_client.rb'
 require './minilab_shelter.rb'
 
-HappyTails = Shelter.new("Happy Tails Shelter")
-HappyTails.pets << Animal.new("Foo", 2, "male", "dog", ["ball", "bone", "rope"])
-HappyTails.clients << Client.new("John", 43, 2, 0)
+happytails = Shelter.new("Happy Tails Shelter")
+happytails.pets << Animal.new("Foo", 2, "male", "dog", ["ball", "bone", "rope"])
+happytails.clients << Client.new("John", 43, 2, 0)
+happytails.clients << Client.new("Franco", 50, 0, 0)
 
 def menu message
 	puts `clear`
@@ -39,7 +40,7 @@ while choice != 'q'
 		species = gets.chomp
 		print "Animal toys (EX:  ball, bone, rope):"
 		toys = gets.chomp.split(", ")
-		HappyTails.pets << Animal.new(name, age, gender, species, toys)
+		happytails.pets << Animal.new(name, age, gender, species, toys)
 		message += "#{name} the #{gender} #{species} has been created!"
 
 	when "2"
@@ -52,16 +53,16 @@ while choice != 'q'
 		children = gets.chomp.to_i
 		print "Number of current pets:"
 		pets = gets.chomp.to_i
-		HappyTails.clients << Client.new(name, age, pets, children)
+		happytails.clients << Client.new(name, age, pets, children)
 		message += "#{name} is now a new client of Happy Tails Shelter!  Welcome!"
 
 	when "3"
-		HappyTails.pets.each do |x|
+		happytails.pets.each do |x|
 			message += x.name + " "
 		end
 
 	when "4"
-		HappyTails.clients.each do |x|
+		happytails.clients.each do |x|
 			message += x.name + " "
 		end
 	
@@ -70,13 +71,13 @@ while choice != 'q'
 		puts "First we'll see if they are in our database of clients already"
 		puts "What is the client's name?"
 		name = gets.chomp
-		if HappyTails.client_names.include?(name)
+		if happytails.client_names.include?(name)
 			puts "I see here we have #{name} in our system."
 			puts "Please verify the following:\n Client Age: #{name}.age \n No of Children: #{name}.num_of_chldren \n No of Pets: #{name}.num_of_pets"
 			puts "What animal would #{name} like to adopt?"
 			animal_name = gets.chomp
 			puts "Let me check on that..."
-			HappyTails.pets.each { |x| p x.name if x.name == animal_name }
+			happytails.pets.each { |x| p x.name if x.name == animal_name }
 		else 
 			puts "It looks like #{name} is not in the system...let's add them..."
 			print "Client name: #{name}\n"
@@ -86,7 +87,7 @@ while choice != 'q'
 			children = gets.chomp.to_i
 			print "Number of current pets:"
 			pets = gets.chomp.to_i
-			HappyTails.clients << Client.new(name, age, children, pets)
+			happytails.clients << Client.new(name, age, children, pets)
 		end
 
 	when "6"
@@ -104,7 +105,7 @@ while choice != 'q'
 		toys = gets.chomp.split(", ")
 		puts "#{name} the #{gender} #{species} is being added to the database"
 		new_animal = Animal.new(name_animal, age_animal, gender, species, toys)
-		HappyTails.pets << new_animal
+		happytails.pets << new_animal
 		puts "\n\n\nNow we need some information from our new client..."
 		puts "Client name: "
 		name_client = gets.chomp
@@ -115,10 +116,10 @@ while choice != 'q'
 		puts "Number of current pets (not including #{name_animal} here): "
 		num_of_pets = gets.chomp.to_i
 		new_client = Client.new(name_client, age_client, num_of_chldren, num_of_pets)
-		if @clients.include?(new_client)
-			puts "It looks like #{name_client} is in the system already.  Great!"
+		if happytails.clients.include?(new_client)
+			message += "It looks like #{name_client} is in the system already.  Great!\n"
 		else
-			new_client << @clients
+			happytails.clients.push(new_client)
 		end
 
 		message += "Thank you!  We hope to find #{name_animal} a good home!"
