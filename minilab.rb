@@ -65,6 +65,28 @@ while choice != 'q'
 			p x.name
 		end
 	
+	when "5"
+		puts "A client wants to adopt a pet?!\nThat's AWESOME!!!"
+		puts "First we'll see if they are in our database of clients already"
+		puts "What is the client's name?"
+		name = gets.chomp
+		if HappyTails.clients.include(x)
+			puts "I see we have #{name} in our system."
+			puts "What animal would #{name} like to adopt?"
+			animal_name = gets.chomp
+			puts "Let me check on that..."
+			HappyTails.pets.each { |x| p x if x.name == animal_name }
+		else 
+			puts "It looks like #{name} is not in the system...let's add them..."
+			print "Client name: #{name}"
+			print "Client age:"
+			age = gets.chomp.to_i
+			print "Number of children:"
+			children = gets.chomp.to_i
+			print "Number of current pets:"
+			pets = gets.chomp.to_i
+			HappyTails.clients << Client.new(name, age, pets, children)
+		end
 
 	else
 		puts "ERROR!  ERROR!  Incorrect input!!"
