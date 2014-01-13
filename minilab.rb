@@ -13,19 +13,19 @@ def menu message
 
 	puts "#{message}\n\n" unless message.empty?
 
-	puts ">>Happy Tails Shelter<<"
+	puts ">>>Happy Tails Shelter<<<"
 	puts
-	puts ">----------V1----------<"
+	puts " ----  Version 1.0  ---- "
 
-	puts "************************"
-	puts "* 1 : Create an animal *"
-	puts "* 2 : Create a client  *"
-	puts "* 3 : List animals     *"
-	puts "* 4 : List clients     *"
-	puts "* 5 : Adoption         *"
-	puts "* 6 : Aanimal Take-In  *"
-	puts "* q : QUIT             *"
-	puts "************************"
+	puts "*************************"
+	puts "* 1 : Create an animal  *"
+	puts "* 2 : Create a client   *"
+	puts "* 3 : List animals      *"
+	puts "* 4 : List clients      *"
+	puts "* 5 : Adoption          *"
+	puts "* 6 : Aanimal Take-In   *"
+	puts "* q : QUIT              *"
+	puts "*************************"
 	puts 
 	print "-->"
 	gets.chomp
