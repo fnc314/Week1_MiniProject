@@ -39,7 +39,8 @@ end
 	end
 
 def client_from_name(name)
-	@clients[client_name.index(name)]
+	client_names
+	@clients[client_names.index(name)]
 end
 
 end

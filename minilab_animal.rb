@@ -9,5 +9,5 @@ class Animal
 		@species = species
 		@toys = toys
 	end
- # Use a splat * for toys???
+	
 end
