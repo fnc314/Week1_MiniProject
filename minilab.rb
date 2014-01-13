@@ -15,9 +15,9 @@ def menu message
 
 	puts "#{message}\n\n" unless message.empty?
 
-	puts ">>>Happy Tails Shelter<<<"
+	puts "   Happy Tails Shelter   "
 	puts
-	puts " ----- Version 1.0 ----- "
+	puts " ----- Version 1.1 ----- "
 
 	puts "*************************"
 	puts "* 1 : Create an animal  *"
@@ -26,7 +26,7 @@ def menu message
 	puts "* 4 : List clients      *"
 	puts "* 5 : Adoption          *"
 	puts "* 6 : Aanimal Take-In   *"
-	puts "* q : QUIT              *"
+	puts "* Q : QUIT              *"
 	puts "*************************"
 	puts 
 	print "-->"
@@ -35,7 +35,7 @@ end
 
 message = ''
 choice = menu message
-while choice != 'q'
+while choice != 'q' || choice != 'Q'
 	message = ''
 	case choice
 	when "1"
