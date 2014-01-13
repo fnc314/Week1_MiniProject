@@ -13,6 +13,9 @@ def menu message
 
 	puts "#{message}\n\n" unless message.empty?
 
+	puts ">>Happy Tails Shelter<<"
+	puts ">---------V 1---------<"
+
 	puts "************************"
 	puts "* 1 : Create an animal *"
 	puts "* 2 : Create a client  *"
@@ -79,7 +82,7 @@ while choice != 'q'
 		name = gets.chomp
 		if happytails.client_names.include?(name)
 			puts "I see here we have #{name} in our system."
-			puts "We have:\n Client Age: #{happytails.client_from_name(name).age} yo \n No of Children: #{happytails.client_from_name(name).num_of_children} \n No of Pets: #{happytails.client_from_name(name).num_of_pets}"
+			puts "We have:\nClient Age: #{happytails.client_from_name(name).age} years old\nNo. of Children: #{happytails.client_from_name(name).num_of_children}\nNo. of Pets: #{happytails.client_from_name(name).num_of_pets}"
 			puts "What animal would #{name} like to adopt?"
 			happytails.pets.each {|x| p x.name}
 			choice = gets.chomp
