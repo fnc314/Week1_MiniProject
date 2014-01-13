@@ -79,21 +79,13 @@ while choice != 'q'
 		name = gets.chomp
 		if happytails.client_names.include?(name)
 			puts "I see here we have #{name} in our system."
-			puts "Please verify the following:\n Client Age: #{happytails.client_from_name(name).age} yo \n No of Children: #{happytails.client_from_name(name).num_of_chldren} \n No of Pets: #{happytails.client_from_name(name).num_of_pets}"
-			puts "Is this data correct? (Y/N)"
-			correct = gets.chomp
-			if correct == "y" || correct == "Y"
-				puts "What animal would #{name} like to adopt?"
-				happytails.pets.each {|x| p x.names}
-				choice = gets.chomp
-				@animals.delete_if { |x| x.name == choice }
-				happytails.clients.
-				#add one to the num_of_pets for client
-
+			puts "We have:\n Client Age: #{happytails.client_from_name(name).age} yo \n No of Children: #{happytails.client_from_name(name).num_of_children} \n No of Pets: #{happytails.client_from_name(name).num_of_pets}"
 			puts "What animal would #{name} like to adopt?"
 			happytails.pets.each {|x| p x.name}
 			choice = gets.chomp
+			happytails.pets.delete_if { |x| x.name == choice }
 			
+			#add one to the num_of_pets for client			
 		else 
 			puts "It looks like #{name} is not in the system...let's add them..."
 			print "Client name: #{name}\n"
@@ -119,10 +111,10 @@ while choice != 'q'
 		species = gets.chomp
 		puts "Any toys (EX: ball, bone, rope): "
 		toys = gets.chomp.split(", ")
-		puts "So we have #{name} the #{gender} #{species} being added to the database"
+		puts "So we have #{name} the #{gender} #{species} being added to the database..."
 		new_animal = Animal.new(name_animal, age_animal, gender, species, toys)
 		happytails.pets << new_animal
-		puts "\n\n\nNow we need some information from our new client..."
+		puts "\n\nNow we need some information from our new client..."
 		puts "Client name: "
 		name_client = gets.chomp
 		puts "Client age: "
