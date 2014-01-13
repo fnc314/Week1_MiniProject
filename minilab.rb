@@ -6,7 +6,7 @@ happytails = Shelter.new("Happy Tails Shelter")
 happytails.pets << Animal.new("Foo", 2, "male", "dog", ["ball", "bone", "rope"])
 happytails.pets << Animal.new("Cindy", 3, "female", "cat")
 happytails.clients << Client.new("John", 43, 2, 0)
-happytails.clients << Client.new("Franco", 50, 0, 0)
+happytails.clients << Client.new("Franco", 50, 0, 5)
 
 def menu message
 	puts `clear`
@@ -14,7 +14,8 @@ def menu message
 	puts "#{message}\n\n" unless message.empty?
 
 	puts ">>Happy Tails Shelter<<"
-	puts ">---------V 1---------<"
+	puts
+	puts ">----------V1----------<"
 
 	puts "************************"
 	puts "* 1 : Create an animal *"
@@ -22,7 +23,7 @@ def menu message
 	puts "* 3 : List animals     *"
 	puts "* 4 : List clients     *"
 	puts "* 5 : Adoption         *"
-	puts "* 6 : ANIMAL TAKE-IN   *"
+	puts "* 6 : Aanimal Take-In  *"
 	puts "* q : QUIT             *"
 	puts "************************"
 	puts 
@@ -87,7 +88,7 @@ while choice != 'q'
 			happytails.pets.each {|x| p x.name}
 			choice = gets.chomp
 			happytails.pets.delete_if { |x| x.name == choice }
-			happytails.clients.client_from_name(name).adopt_a_pet
+			happytails.client_from_name(name).adopt_a_pet
 			message += "#{name} has just adopted #{choice}!\nHOW EXCITING!!!"		
 		else 
 			puts "It looks like #{name} is not in the system...let's add them..."
@@ -103,7 +104,7 @@ while choice != 'q'
 			happytails.pets.each {|x| p x.name}
 			choice = gets.chomp
 			happytails.pets.delete_if { |x| x.name == choice }
-			happytails.clients.client_from_name(name).adopt_a_pet
+			happytails.client_from_name(name).adopt_a_pet
 			message += "#{name} has just adopted #{choice}!\nHOW EXCITING!!!!"
 		end
 
@@ -130,13 +131,15 @@ while choice != 'q'
 		age_client = gets.chomp.to_i
 		puts "Number of children: "
 		num_of_chldren = gets.chomp.to_i
-		puts "Number of current pets (not including #{name_animal} here): "
+		puts "Number of current pets (including #{name_animal} here): "
 		num_of_pets = gets.chomp.to_i
 		new_client = Client.new(name_client, age_client, num_of_chldren, num_of_pets)
 		if happytails.clients.include?(new_client)
+			happytails.client_from_name(name_client).pet_up_for_adoption
 			message += "It looks like #{name_client} is in the system already.  Great!\n"
 		else
 			happytails.clients.push(new_client)
+			happytails.client_from_name(name_client).pet_up_for_adoption
 			message += "#{name_client} has been added to the database! "
 		end
 
