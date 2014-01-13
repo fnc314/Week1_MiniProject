@@ -11,6 +11,8 @@ happytails.clients << Client.new("Franco", 50, 0, 5)
 def menu message
 	puts `clear`
 
+	puts
+
 	puts "#{message}\n\n" unless message.empty?
 
 	puts ">>>Happy Tails Shelter<<<"
