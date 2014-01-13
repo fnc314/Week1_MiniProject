@@ -15,7 +15,7 @@ def menu message
 
 	puts ">>>Happy Tails Shelter<<<"
 	puts
-	puts " ----  Version 1.0  ---- "
+	puts " ----- Version 1.0 ----- "
 
 	puts "*************************"
 	puts "* 1 : Create an animal  *"
@@ -78,7 +78,7 @@ while choice != 'q'
 	
 	when "5"
 		puts "A client wants to adopt a pet?!\nThat's AWESOME!!!"
-		puts "First we'll see if they are in our database of clients already"
+		puts "First we'll see if they are in our database of clients already..."
 		puts "What is the client's name?"
 		name = gets.chomp
 		if happytails.client_names.include?(name)
@@ -127,25 +127,23 @@ while choice != 'q'
 		puts "\n\nNow we need some information from our new client..."
 		puts "Client name: "
 		name_client = gets.chomp
-		puts "Client age: "
-		age_client = gets.chomp.to_i
-		puts "Number of children: "
-		num_of_chldren = gets.chomp.to_i
-		puts "Number of current pets (including #{name_animal} here): "
-		num_of_pets = gets.chomp.to_i
-		new_client = Client.new(name_client, age_client, num_of_chldren, num_of_pets)
-		if happytails.clients.include?(new_client)
+		if happytails.client_names.include?(name_client)
+			puts "I see here we have #{name} in our system."
+			puts "We have:\nClient Age: #{happytails.client_from_name(name_client).age} years old\nNo. of Children: #{happytails.client_from_name(name_client).num_of_children}\nNo. of Pets: #{happytails.client_from_name(name_client).num_of_pets}"
 			happytails.client_from_name(name_client).put_up_for_adoption
-			message += "It looks like #{name_client} is in the system already.  Great!\n"
-		
-		# For some reason I cannot get this to recognize if a client already exists and then to act on that instance of the Client Class...
-
+			message += "It looks like #{name_client} is in the system already.  Great!\n#{name_animal} is now a new member of the Happy Tree Family!\n"
 		else
-			happytails.clients.push(new_client)
+			puts "It looks like #{name_client} is not in our database.\nLet's add them shall we..."
+			puts "Client age: "
+			age_client = gets.chomp.to_i
+			puts "Number of children: "
+			num_of_chldren = gets.chomp.to_i
+			puts "Number of current pets (include #{name_animal}): "
+			num_of_pets = gets.chomp.to_i
+			new_client = Client.new(name_client, age_client, num_of_chldren, num_of_pets)
 			happytails.client_from_name(name_client).put_up_for_adoption
-			message += "#{name_client} has been added to the database! "
+			message += "We've now added #{name_client} to our database.\n"
 		end
-
 		message += "Thank you!  We hope to find #{name_animal} a good home!"
 
 
