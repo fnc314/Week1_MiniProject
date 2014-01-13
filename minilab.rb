@@ -137,6 +137,9 @@ while choice != 'q'
 		if happytails.clients.include?(new_client)
 			happytails.client_from_name(name_client).put_up_for_adoption
 			message += "It looks like #{name_client} is in the system already.  Great!\n"
+		
+		# For some reason I cannot get this to recognize if a client already exists and then to act on that instance of the Client Class...
+
 		else
 			happytails.clients.push(new_client)
 			happytails.client_from_name(name_client).put_up_for_adoption
