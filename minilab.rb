@@ -121,7 +121,7 @@ while choice != 'q'
 		species = gets.chomp
 		puts "Any toys (EX: ball, bone, rope): "
 		toys = gets.chomp.split(", ")
-		puts "So we have #{name} the #{gender} #{species} being added to the database..."
+		puts "So we have #{name_animal} the #{gender} #{species} being added to the database..."
 		new_animal = Animal.new(name_animal, age_animal, gender, species, toys)
 		happytails.pets << new_animal
 		puts "\n\nNow we need some information from our new client..."
@@ -135,11 +135,11 @@ while choice != 'q'
 		num_of_pets = gets.chomp.to_i
 		new_client = Client.new(name_client, age_client, num_of_chldren, num_of_pets)
 		if happytails.clients.include?(new_client)
-			happytails.client_from_name(name_client).pet_up_for_adoption
+			happytails.client_from_name(name_client).put_up_for_adoption
 			message += "It looks like #{name_client} is in the system already.  Great!\n"
 		else
 			happytails.clients.push(new_client)
-			happytails.client_from_name(name_client).pet_up_for_adoption
+			happytails.client_from_name(name_client).put_up_for_adoption
 			message += "#{name_client} has been added to the database! "
 		end
 
