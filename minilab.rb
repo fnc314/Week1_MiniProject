@@ -10,15 +10,13 @@ happytails.clients << Client.new("Franco", 50, 0, 5)
 
 def menu message
 	puts `clear`
-
 	puts
-
 	puts "#{message}\n\n" unless message.empty?
 
 	puts "   Happy Tails Shelter   "
 	puts
 	puts " ----- Version 1.1 ----- "
-
+	puts
 	puts "*************************"
 	puts "* 1 : Create an animal  *"
 	puts "* 2 : Create a client   *"
@@ -35,9 +33,12 @@ end
 
 message = ''
 choice = menu message
+
 while choice != 'q'
+	
 	message = ''
 	case choice
+	
 	when "1"
 		puts "Enter animal info:"
 		print "Animal name:"
@@ -83,6 +84,7 @@ while choice != 'q'
 		puts "First we'll see if they are in our database of clients already..."
 		puts "What is the client's name?"
 		name = gets.chomp
+		
 		if happytails.client_names.include?(name)
 			puts "I see here we have #{name} in our system."
 			puts "We have:\nClient Age: #{happytails.client_from_name(name).age} years old\nNo. of Children: #{happytails.client_from_name(name).num_of_children}\nNo. of Pets: #{happytails.client_from_name(name).num_of_pets}"
@@ -129,6 +131,7 @@ while choice != 'q'
 		puts "\n\nNow we need some information from our new client..."
 		puts "Client name: "
 		name_client = gets.chomp
+		
 		if happytails.client_names.include?(name_client)
 			puts "I see here we have #{name} in our system."
 			puts "We have:\nClient Age: #{happytails.client_from_name(name_client).age} years old\nNo. of Children: #{happytails.client_from_name(name_client).num_of_children}\nNo. of Pets: #{happytails.client_from_name(name_client).num_of_pets}"
@@ -146,9 +149,8 @@ while choice != 'q'
 			happytails.client_from_name(name_client).put_up_for_adoption
 			message += "We've now added #{name_client} to our database.\n"
 		end
+		
 		message += "Thank you!  We hope to find #{name_animal} a good home!"
-
-
 
 	else
 		message += "ERROR!  ERROR!  Incorrect input!!"
