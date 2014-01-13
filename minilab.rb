@@ -84,8 +84,8 @@ while choice != 'q'
 			happytails.pets.each {|x| p x.name}
 			choice = gets.chomp
 			happytails.pets.delete_if { |x| x.name == choice }
-			
-			#add one to the num_of_pets for client			
+			happytails.clients.client_from_name(name).adopt_a_pet
+			message += "#{name} has just adopted #{choice}!\nHOW EXCITING!!!"		
 		else 
 			puts "It looks like #{name} is not in the system...let's add them..."
 			print "Client name: #{name}\n"
@@ -96,6 +96,12 @@ while choice != 'q'
 			print "Number of current pets:"
 			pets = gets.chomp.to_i
 			happytails.clients << Client.new(name, age, children, pets)
+			puts "What animal would #{name} like to adopt?"
+			happytails.pets.each {|x| p x.name}
+			choice = gets.chomp
+			happytails.pets.delete_if { |x| x.name == choice }
+			happytails.clients.client_from_name(name).adopt_a_pet
+			message += "#{name} has just adopted #{choice}!\nHOW EXCITING!!!!"
 		end
 
 	when "6"
