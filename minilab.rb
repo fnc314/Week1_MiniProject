@@ -4,6 +4,7 @@ require './minilab_shelter.rb'
 
 happytails = Shelter.new("Happy Tails Shelter")
 happytails.pets << Animal.new("Foo", 2, "male", "dog", ["ball", "bone", "rope"])
+happytails.pets << Animal.new("Cindy", 3, "female", "cat")
 happytails.clients << Client.new("John", 43, 2, 0)
 happytails.clients << Client.new("Franco", 50, 0, 0)
 
@@ -21,7 +22,7 @@ def menu message
 	puts "* 6 : ANIMAL TAKE-IN   *"
 	puts "* q : QUIT             *"
 	puts "************************"
-	puts `clear`
+	puts 
 	print "-->"
 	gets.chomp
 end
@@ -44,6 +45,7 @@ while choice != 'q'
 		print "Animal toys (EX:  ball, bone, rope):"
 		toys = gets.chomp.split(", ")
 		happytails.pets << Animal.new(name, age, gender, species, toys)
+
 		message += "#{name} the #{gender} #{species} has been created!"
 
 	when "2"
@@ -57,16 +59,17 @@ while choice != 'q'
 		print "Number of current pets:"
 		pets = gets.chomp.to_i
 		happytails.clients << Client.new(name, age, pets, children)
+
 		message += "#{name} is now a new client of Happy Tails Shelter!  Welcome!"
 
 	when "3"
 		happytails.pets.each do |x|
-			message += [x.name, x.species].to_s + " "
+			message += "#{x.name}: #{x.species}, #{x.gender}, #{x.age}yo\n"
 		end
 
 	when "4"
 		happytails.clients.each do |x|
-			message += x.name + " "
+			message += "#{x.name}, #{x.age}, #{x.num_of_chldren} children, #{x.num_of_pets} pets\n"
 		end
 	
 	when "5"
