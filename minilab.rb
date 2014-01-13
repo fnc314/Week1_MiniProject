@@ -26,7 +26,7 @@ def menu message
 	puts "* 4 : List clients      *"
 	puts "* 5 : Adoption          *"
 	puts "* 6 : Aanimal Take-In   *"
-	puts "* Q : QUIT              *"
+	puts "* q : QUIT              *"
 	puts "*************************"
 	puts 
 	print "-->"
@@ -35,7 +35,7 @@ end
 
 message = ''
 choice = menu message
-while choice != 'q' || choice != 'Q'
+while choice != 'q'
 	message = ''
 	case choice
 	when "1"
