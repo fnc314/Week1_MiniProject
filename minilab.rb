@@ -12,13 +12,16 @@ def menu message
 
 	puts "#{message}\n\n" unless message.empty?
 
-	puts "1 : Create an animal"
-	puts "2 : Create a client"
-	puts "3 : List animals"
-	puts "4 : List clients"
-	puts "5 : ADOPTION"
-	puts "6 : ANIMAL TAKE-IN"
-	puts "q : QUIT"
+	puts "************************"
+	puts "* 1 : Create an animal *"
+	puts "* 2 : Create a client  *"
+	puts "* 3 : List animals     *"
+	puts "* 4 : List clients     *"
+	puts "* 5 : Adoption         *"
+	puts "* 6 : ANIMAL TAKE-IN   *"
+	puts "* q : QUIT             *"
+	puts "************************"
+	puts `clear`
 	print "-->"
 	gets.chomp
 end
@@ -58,7 +61,7 @@ while choice != 'q'
 
 	when "3"
 		happytails.pets.each do |x|
-			message += x.name + " "
+			message += [x.name, x.species].to_s + " "
 		end
 
 	when "4"
@@ -75,9 +78,9 @@ while choice != 'q'
 			puts "I see here we have #{name} in our system."
 			puts "Please verify the following:\n Client Age: #{name}.age \n No of Children: #{name}.num_of_chldren \n No of Pets: #{name}.num_of_pets"
 			puts "What animal would #{name} like to adopt?"
-			animal_name = gets.chomp
-			puts "Let me check on that..."
-			happytails.pets.each { |x| p x.name if x.name == animal_name }
+			happytails.pets.each {|x| p x.name}
+			choice = gets.chomp
+			
 		else 
 			puts "It looks like #{name} is not in the system...let's add them..."
 			print "Client name: #{name}\n"
@@ -103,7 +106,7 @@ while choice != 'q'
 		species = gets.chomp
 		puts "Any toys (EX: ball, bone, rope): "
 		toys = gets.chomp.split(", ")
-		puts "#{name} the #{gender} #{species} is being added to the database"
+		puts "So we have #{name} the #{gender} #{species} being added to the database"
 		new_animal = Animal.new(name_animal, age_animal, gender, species, toys)
 		happytails.pets << new_animal
 		puts "\n\n\nNow we need some information from our new client..."
@@ -117,7 +120,7 @@ while choice != 'q'
 		num_of_pets = gets.chomp.to_i
 		new_client = Client.new(name_client, age_client, num_of_chldren, num_of_pets)
 		if happytails.clients.include?(new_client)
-			message += "It looks like #{name_client} is in the system already.  Great!\n"
+			puts "It looks like #{name_client} is in the system already.  Great!\n"
 		else
 			happytails.clients.push(new_client)
 		end
