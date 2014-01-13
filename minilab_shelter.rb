@@ -38,4 +38,8 @@ end
 		end
 	end
 
+def client_from_name(name)
+	@clients[client_name.index(name)]
+end
+
 end

@@ -69,7 +69,7 @@ while choice != 'q'
 
 	when "4"
 		happytails.clients.each do |x|
-			message += "#{x.name}, #{x.age}, #{x.num_of_chldren} children, #{x.num_of_pets} pets\n"
+			message += "#{x.name}, #{x.age}, #{x.num_of_children} children, #{x.num_of_pets} pets\n"
 		end
 	
 	when "5"
@@ -79,7 +79,7 @@ while choice != 'q'
 		name = gets.chomp
 		if happytails.client_names.include?(name)
 			puts "I see here we have #{name} in our system."
-			puts "Please verify the following:\n Client Age: #{name}.age \n No of Children: #{name}.num_of_chldren \n No of Pets: #{name}.num_of_pets"
+			puts "Please verify the following:\n Client Age: happytails.client_from_name(name).age yo \n No of Children: happytails.client_from_name.num_of_chldren \n No of Pets: happytails.client_from_name.num_of_pets"
 			puts "What animal would #{name} like to adopt?"
 			happytails.pets.each {|x| p x.name}
 			choice = gets.chomp
@@ -123,9 +123,10 @@ while choice != 'q'
 		num_of_pets = gets.chomp.to_i
 		new_client = Client.new(name_client, age_client, num_of_chldren, num_of_pets)
 		if happytails.clients.include?(new_client)
-			puts "It looks like #{name_client} is in the system already.  Great!\n"
+			message += "It looks like #{name_client} is in the system already.  Great!\n"
 		else
 			happytails.clients.push(new_client)
+			message += "#{name_client} has been added to the database!"
 		end
 
 		message += "Thank you!  We hope to find #{name_animal} a good home!"
